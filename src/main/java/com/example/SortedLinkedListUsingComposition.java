@@ -47,6 +47,14 @@ public final class SortedLinkedListUsingComposition<E extends Comparable<E>> imp
         return new SortedLinkedListUsingComposition<>(comparator);
     }
 
+    /**
+     * Inserts the specified element into the list and sorts the list to maintain sorted order.
+     * Duplicate values are allowed and will be kept in order of insertion among equals.
+     *
+     * @param e element to be inserted (must not be null)
+     * @return true if the list was modified as a result of this call
+     * @throws NullPointerException if the specified element is null
+     */
     @Override
     public boolean add(E e) {
         Objects.requireNonNull(e);
@@ -57,6 +65,14 @@ public final class SortedLinkedListUsingComposition<E extends Comparable<E>> imp
         return result;
     }
 
+    /**
+     * Inserts all elements from the specified collection into the list, then sorts the list to maintain sorted order.
+     * The input collection may contain duplicate values, which will be preserved.
+     *
+     * @param c collection containing elements to be added (must not be null or contain nulls)
+     * @return true if the list was modified as a result of this call
+     * @throws NullPointerException if the collection or any of its elements is null
+     */
     @Override
     public boolean addAll(Collection<? extends E> c) {
         if (c.isEmpty()) {
@@ -73,79 +89,123 @@ public final class SortedLinkedListUsingComposition<E extends Comparable<E>> imp
         return result;
     }
 
+    /**
+     * @see LinkedList#size()
+     */
     @Override
     public int size() {
         return linkedList.size();
     }
 
+    /**
+     * @see LinkedList#isEmpty()
+     */
     @Override
     public boolean isEmpty() {
         return linkedList.isEmpty();
     }
 
+    /**
+     * @see LinkedList#contains(Object)
+     */
     @Override
     public boolean contains(Object o) {
         return linkedList.contains(o);
     }
 
+    /**
+     * @see LinkedList#iterator()
+     */
     @Override
     public Iterator<E> iterator() {
         return linkedList.iterator();
     }
 
+    /**
+     * @see LinkedList#toArray()
+     */
     @Override
     public Object[] toArray() {
         return linkedList.toArray();
     }
 
+    /**
+     * @see LinkedList#toArray(Object[])
+     */
     @Override
     public <T> T[] toArray(T[] a) {
         return linkedList.toArray(a);
     }
 
+    /**
+     * @see LinkedList#remove(Object)
+     */
     @Override
     public boolean remove(Object o) {
         return linkedList.remove(o);
     }
 
+    /**
+     * @see LinkedList#containsAll(Collection)
+     */
     @Override
     public boolean containsAll(Collection<?> c) {
         return linkedList.containsAll(c);
     }
 
+    /**
+     * @see LinkedList#removeAll(Collection)
+     */
     @Override
     public boolean removeAll(Collection<?> c) {
         return linkedList.removeAll(c);
     }
 
+    /**
+     * @see LinkedList#retainAll(Collection)
+     */
     @Override
     public boolean retainAll(Collection<?> c) {
         return linkedList.retainAll(c);
     }
 
+    /**
+     * @see LinkedList#clear()
+     */
     @Override
     public void clear() {
         linkedList.clear();
     }
 
+    /**
+     * @see LinkedList#reversed()
+     */
     @Override
     public SequencedCollection<E> reversed() {
         return linkedList.reversed();
     }
 
+    /**
+     * @see LinkedList#equals(Object)
+     */
     @Override
     public boolean equals(Object o) {
         if (o == null || getClass() != o.getClass()) return false;
-
         SortedLinkedListUsingComposition<?> that = (SortedLinkedListUsingComposition<?>) o;
         return linkedList.equals(that.linkedList);
     }
 
+    /**
+     * @see LinkedList#hashCode()
+     */
     @Override
     public int hashCode() {
         return linkedList.hashCode();
     }
 
+    /**
+     * @see LinkedList#toString()
+     */
     @Override
     public String toString() {
         return linkedList.toString();

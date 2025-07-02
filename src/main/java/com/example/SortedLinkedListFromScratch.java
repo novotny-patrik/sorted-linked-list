@@ -47,16 +47,34 @@ public final class SortedLinkedListFromScratch<E extends Comparable<E>> implemen
         return new SortedLinkedListFromScratch<>(comparator);
     }
 
+    /**
+     * Returns the number of elements in the list.
+     *
+     * @return the number of elements in this list
+     */
     @Override
     public int size() {
         return size;
     }
 
+    /**
+     * Returns true if the list contains no elements.
+     *
+     * @return true if the list is empty, false otherwise
+     */
     @Override
     public boolean isEmpty() {
         return size == 0;
     }
 
+    /**
+     * Inserts the specified element into the list at the correct position to maintain sorted order.
+     * Duplicate values are allowed and will be inserted after existing equal elements.
+     *
+     * @param e element to be inserted (must not be null)
+     * @return true if the list was modified as a result of this call
+     * @throws NullPointerException if the specified element is null
+     */
     @Override
     public boolean add(E e) {
         Objects.requireNonNull(e);
@@ -91,6 +109,14 @@ public final class SortedLinkedListFromScratch<E extends Comparable<E>> implemen
         return true;
     }
 
+    /**
+     * Inserts all elements from the specified collection into the list, maintaining sorted order.
+     * The input collection may contain duplicate values, which will be preserved.
+     *
+     * @param c collection containing elements to be added (must not be null or contain nulls)
+     * @return true if the list was modified as a result of this call
+     * @throws NullPointerException if the collection or any of its elements is null
+     */
     @Override
     public boolean addAll(Collection<? extends E> c) {
         Objects.requireNonNull(c);
@@ -103,8 +129,8 @@ public final class SortedLinkedListFromScratch<E extends Comparable<E>> implemen
 
         boolean modified = false;
         for (E element : c) {
-            // Maybe more sophisticated adding could be used - iterating only once through the collections,
-            // but there is overhead of sorting the input collection first, probably using helper collection.
+            // Maybe more sophisticated adding could be used - iterating only once through both collections,
+            // but there is overhead of sorting the input collection first, probably need of using helper collection - extra space complexity.
             // Not sure if it is worth it.
             if (add(element)) {
                 modified = true;
@@ -113,6 +139,12 @@ public final class SortedLinkedListFromScratch<E extends Comparable<E>> implemen
         return modified;
     }
 
+    /**
+     * Removes the first occurrence of the specified element from the list, if it is present.
+     *
+     * @param o element to be removed from this list, if present
+     * @return true if the list contained the specified element and it was removed
+     */
     @Override
     public boolean remove(Object o) {
         if (size == 0 || o == null || !(o instanceof Comparable)) {
@@ -145,6 +177,12 @@ public final class SortedLinkedListFromScratch<E extends Comparable<E>> implemen
         return false;
     }
 
+    /**
+     * Returns true if this list contains the specified element.
+     *
+     * @param o element whose presence in this list is to be tested
+     * @return true if this list contains the specified element
+     */
     @Override
     public boolean contains(Object o) {
         if (size == 0 || o == null || !(o instanceof Comparable)) {
@@ -170,6 +208,11 @@ public final class SortedLinkedListFromScratch<E extends Comparable<E>> implemen
         return false;
     }
 
+    /**
+     * Returns an iterator over the elements in this list in proper sequence.
+     *
+     * @return an iterator over the elements in this list
+     */
     @Override
     public Iterator<E> iterator() {
         return new Iterator<>() {
@@ -192,6 +235,11 @@ public final class SortedLinkedListFromScratch<E extends Comparable<E>> implemen
         };
     }
 
+    /**
+     * Returns an array containing all of the elements in this list in proper sequence.
+     *
+     * @return an array containing all of the elements in this list
+     */
     @Override
     public Object[] toArray() {
         Object[] result = new Object[size];
@@ -204,6 +252,12 @@ public final class SortedLinkedListFromScratch<E extends Comparable<E>> implemen
         return result;
     }
 
+    /**
+     * Returns an array containing all of the elements in this list in proper sequence; the runtime type of the returned array is that of the specified array.
+     *
+     * @param a the array into which the elements of this list are to be stored, if it is big enough; otherwise, a new array of the same runtime type is allocated for this purpose
+     * @return an array containing the elements of this list
+     */
     @Override
     @SuppressWarnings("unchecked")
     public <T> T[] toArray(T[] a) {
@@ -223,6 +277,12 @@ public final class SortedLinkedListFromScratch<E extends Comparable<E>> implemen
         return a;
     }
 
+    /**
+     * Returns true if this list contains all of the elements of the specified collection.
+     *
+     * @param c collection to be checked for containment in this list
+     * @return true if this list contains all of the elements of the specified collection
+     */
     @Override
     public boolean containsAll(Collection<?> c) {
         if (c == null || c.isEmpty()) {
@@ -236,6 +296,12 @@ public final class SortedLinkedListFromScratch<E extends Comparable<E>> implemen
         return true;
     }
 
+    /**
+     * Removes from this list all of its elements that are contained in the specified collection.
+     *
+     * @param c collection containing elements to be removed from this list
+     * @return true if this list changed as a result of the call
+     */
     @Override
     public boolean removeAll(Collection<?> c) {
         Objects.requireNonNull(c);
@@ -251,6 +317,12 @@ public final class SortedLinkedListFromScratch<E extends Comparable<E>> implemen
         return modified;
     }
 
+    /**
+     * Retains only the elements in this list that are contained in the specified collection.
+     *
+     * @param c collection containing elements to be retained in this list
+     * @return true if this list changed as a result of the call
+     */
     @Override
     public boolean retainAll(Collection<?> c) {
         Objects.requireNonNull(c);
@@ -280,12 +352,20 @@ public final class SortedLinkedListFromScratch<E extends Comparable<E>> implemen
         return modified;
     }
 
+    /**
+     * Removes all of the elements from this list. The list will be empty after this call returns.
+     */
     @Override
     public void clear() {
         first = null;
         size = 0;
     }
 
+    /**
+     * Returns a reversed view of this list, using the reversed comparator.
+     *
+     * @return a new SortedLinkedListFromScratch instance with reversed order
+     */
     @Override
     public SequencedCollection<E> reversed() {
         if (isEmpty()) {
@@ -307,6 +387,12 @@ public final class SortedLinkedListFromScratch<E extends Comparable<E>> implemen
         }
     }
 
+    /**
+     * Indicates whether some other object is "equal to" this one. Two lists are equal if they contain the same elements in the same order.
+     *
+     * @param o the object to compare with
+     * @return true if this list is equal to the specified object
+     */
     @Override
     public boolean equals(Object o) {
         if (o == this) {
@@ -328,6 +414,11 @@ public final class SortedLinkedListFromScratch<E extends Comparable<E>> implemen
         return !(e1.hasNext() || e2.hasNext());
     }
 
+    /**
+     * Returns the hash code value for this list. The hash code is computed based on the elements in the list and their order.
+     *
+     * @return the hash code value for this list
+     */
     @Override
     public int hashCode() {
         int hashCode = 1;
@@ -336,6 +427,11 @@ public final class SortedLinkedListFromScratch<E extends Comparable<E>> implemen
         return hashCode;
     }
 
+    /**
+     * Returns a string representation of this list. The string representation consists of a list of the elements in the order they are returned by its iterator, enclosed in square brackets ("[]").
+     *
+     * @return a string representation of this list
+     */
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
@@ -349,4 +445,3 @@ public final class SortedLinkedListFromScratch<E extends Comparable<E>> implemen
         return sb.toString();
     }
 }
-
